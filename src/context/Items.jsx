@@ -9,7 +9,7 @@ function Provider({children}){
     const [filter, setFilter] = useState(true)
     
     let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjEiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoic3RyaW5nIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvZW1haWxhZGRyZXNzIjoic3RyaW5nIiwiZXhwIjozMzI4NTY0OTQ3NCwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzEwNyIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjcxMDcifQ.oieEkpXrhPZ5z3SR9xzaCOFboI6K-2_5KFbGMMr6AYg"
-
+    // test token, to be replaced later with a login screen handling
 
 const getItems = async () => {
     try {
