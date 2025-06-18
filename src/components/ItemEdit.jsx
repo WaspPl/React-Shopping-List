@@ -2,6 +2,7 @@ import Input from "./Input"
 import Image from "./Image"
 import { useContext, useState } from "react"
 import ItemsContext from "../context/Items"
+import Button from "./Button"
 
 function ItemEdit({item, onSubmit}) {
     const [photo, setPhoto] = useState(item.photo)
@@ -45,16 +46,22 @@ function ItemEdit({item, onSubmit}) {
 
   return (
     <form className="flex flex-row" onSubmit={handleSubmit}>
-        <Image src={photo} alt="No photo" input={true} onChange={handleChangePhoto}/>
-        <div className="flex flex-col w-full p-1 flex-wrap">
-            <Input value={name} onChange={handleChangeName}/>
-            <Input value={description} onChange={handleChangeDesc}/>
+      <div className="w-1/4">
+      <Image src={photo} alt="No photo" input={true} onChange={handleChangePhoto}/>
+      </div>
+      <div className="flex flex-col w-1/2 p-1 flex-wrap">
+        <Input value={name} onChange={handleChangeName}/>
+        <Input value={description} onChange={handleChangeDesc}/>
+      </div>
+      <div className="flex flex-col w-1/4 justify-around items-center">
+        <div className="flex flex-row flex-wrap">  
+          <Input value={quantity} onChange={handleChangeQuantity}/>
+          <Input value={unit} onChange={handleChangeUnit}/> 
         </div>
-            <Input value={quantity} onChange={handleChangeQuantity}/>
-            <Input value={unit} onChange={handleChangeUnit}/> 
-        <button type="submit">Submit</button>
-  </form>
+       <Button square type="submit">Submit</Button>
+      </div>
+    </form>
   )
 }
-
+    
 export default ItemEdit

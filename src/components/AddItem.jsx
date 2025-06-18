@@ -5,6 +5,7 @@ import ImageInput from "./Image"
 import Combobox from "react-widgets/Combobox";
 import Button from "./Button";
 
+
 function Additem() {
 
   const [photo, setPhoto] = useState(null)
@@ -65,10 +66,10 @@ const handleSelectName = async () => {
   return (
     <div className="flex flex-row">
       <form onSubmit={handleSubmit} className="flex flex-row w-full flex-wrap items-center align-middle place-content-center">
-        <ImageInput src={photo} alt="Click here to add an Image" onChange={handleChangePhoto} input={true}/>
+        <ImageInput src={photo} onChange={handleChangePhoto} input={true}/>
         <div className="flex flex-row">
         <div className="flex flex-col p-1">
-          <label>Name (suggestions):</label>
+          <label>Name</label>
           <Combobox
             value={name}
             onChange={handleChangeName}
@@ -79,13 +80,13 @@ const handleSelectName = async () => {
           />
         </div>
 
-        <Input value={description} onChange={handleChangeDesc} label="Details:"/>
+        <Input value={description} onChange={handleChangeDesc} label="Details"/>
         </div>
         <div className="flex flex-row">
-          <Input type="number" value={quantity} onChange={handleChangeQuantity} label="How many?:"/>
-          <Input value={unit} onChange={handleChangeUnit} label="Unit:"/>
+          <Input type="number" value={quantity} onChange={handleChangeQuantity} label="Quantity"/>
+          <Input value={unit} onChange={handleChangeUnit} label="Unit"/>
         </div>
-        <Button>Submit</Button>
+        <Button square>Submit</Button>
       </form>
     </div>
   )

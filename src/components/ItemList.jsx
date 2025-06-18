@@ -8,7 +8,8 @@ function ItemList() {
 
   return (
     <div className="flex flex-row flex-wrap justify-center align-middle">
-      {renderedItems}
+      {renderedItems?.length ? renderedItems : <p className="text-center">The list is empty. <br/> You can add something at the top!</p>}
+
     </div>
   );
 }

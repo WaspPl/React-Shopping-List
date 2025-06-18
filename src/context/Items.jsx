@@ -40,7 +40,7 @@ const filterItems = () => {
         try {
             const response = await axios.post("https://localhost:7107/api/Items", { name, description, quantity, unit, photo, bought: false }, { headers: { Authorization: `Bearer ${token}` } });
 
-            const updatedItems = [...Items, {id: response.data.id, name, description, quantity, unit, photo, bought: false}]
+            const updatedItems = [{id: response.data.id, name, description, quantity, unit, photo, bought: false},...Items,]
             setItems(updatedItems)
         }
         catch(error){

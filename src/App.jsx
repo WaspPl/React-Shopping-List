@@ -16,7 +16,7 @@ function App() {
   }, [Items, filter])
 
   return (
-    <div className="App">
+    <div className="App bg-teal-50 h-screen">
       <Navbar/>
       <ItemList/>
     </div>
