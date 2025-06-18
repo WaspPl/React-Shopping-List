@@ -21,7 +21,6 @@ function Additem() {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    console.log("Submitting form, no reload");
     createItem(name, description, quantity, unit, photo)
     setName("")
     setDescription("")
@@ -64,7 +63,7 @@ const handleSelectName = async () => {
 
   
   return (
-    <div className="flex flex-row">
+    <div className="flex flex-row border-l-5 border-r-5 rounded-xl pr-3 border-teal-300 bg-teal-100">
       <form onSubmit={handleSubmit} className="flex flex-row w-full flex-wrap items-center align-middle place-content-center">
         <ImageInput src={photo} onChange={handleChangePhoto} input={true}/>
         <div className="flex flex-row">

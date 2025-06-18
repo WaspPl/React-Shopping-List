@@ -1,6 +1,6 @@
 import { createContext, useState } from "react";
 import axios from "axios";
-
+import Cookies from "js-cookie"
 const ItemsContext = createContext()
 
 function Provider({children}){
@@ -8,13 +8,10 @@ function Provider({children}){
     const [ItemsRendered, setItemsRendered] = useState([])
     const [filter, setFilter] = useState(true)
     
-    let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjEiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoic3RyaW5nIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvZW1haWxhZGRyZXNzIjoic3RyaW5nIiwiZXhwIjozMzI4NTY0OTQ3NCwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzEwNyIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjcxMDcifQ.oieEkpXrhPZ5z3SR9xzaCOFboI6K-2_5KFbGMMr6AYg"
-    // test token, to be replaced later with a login screen handling
-
 const getItems = async () => {
     try {
         const response = await axios.get("https://localhost:7107/api/Items", {
-            headers: { Authorization: `Bearer ${token}` },
+            headers: { Authorization: `Bearer ${Cookies.get('token')}` },
         });
         const items = response.data;
 
@@ -24,6 +21,7 @@ const getItems = async () => {
     }
 };
 
+
 const filterItems = () => {
     const rendered = filter ? Items.filter(item => !item.bought) : Items;
     console.log("first")
@@ -31,14 +29,14 @@ const filterItems = () => {
 };
 
     const getItemsUnique = async () => {
-        const response = await axios.get("https://localhost:7107/api/Items/unique", { headers: { Authorization: `Bearer ${token}` } })
+        const response = await axios.get("https://localhost:7107/api/Items/unique", { headers: { Authorization: `Bearer ${Cookies.get('token')}` } })
         return response.data
     
     }
 
     const createItem = async (name, description, quantity, unit, photo) => {
         try {
-            const response = await axios.post("https://localhost:7107/api/Items", { name, description, quantity, unit, photo, bought: false }, { headers: { Authorization: `Bearer ${token}` } });
+            const response = await axios.post("https://localhost:7107/api/Items", { name, description, quantity, unit, photo, bought: false }, { headers: { Authorization: `Bearer ${Cookies.get('token')}` } });
 
             const updatedItems = [{id: response.data.id, name, description, quantity, unit, photo, bought: false},...Items,]
             setItems(updatedItems)
@@ -52,7 +50,7 @@ const filterItems = () => {
         const response = await axios.put(
         `https://localhost:7107/api/Items/${id}`,
             {id, name, description, quantity, unit, photo, bought },
-            { headers: { Authorization: `Bearer ${token}` } }
+            { headers: { Authorization: `Bearer ${Cookies.get('token')}` } }
             );
 
         console.log(response)
@@ -70,7 +68,7 @@ const filterItems = () => {
         const response = await axios.put(
         `https://localhost:7107/api/Items/${id}/bought?bought=${bought}`,
             {},
-            { headers: { Authorization: `Bearer ${token}` } }
+            { headers: { Authorization: `Bearer ${Cookies.get('token')}` } }
             );
 
         console.log(response)
@@ -88,7 +86,7 @@ const filterItems = () => {
         console.log(id)
         const response = await axios.delete(
             `https://localhost:7107/api/Items/${id}`,
-            { headers: { Authorization: `Bearer ${token}` } }
+            { headers: { Authorization: `Bearer ${Cookies.get('token')}` } }
             );
 
         const updatedItems = Items.filter((item) => item.id !== id)

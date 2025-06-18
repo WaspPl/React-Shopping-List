@@ -1,25 +1,31 @@
-import ItemList from './components/ItemList';
-import { useEffect, useContext } from 'react';
-import ItemsContext from './context/Items';
-import Navbar from './components/Navbar';
-import "react-widgets/styles.css";
+import Home from './components/views/home';
+import Login from './components/views/login';
+import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import {useAuth, AuthProvider} from './context/Auth'
+
+
 
 function App() {
-
-  const {Items, getItems, filterItems, filter } = useContext(ItemsContext)
-
-  useEffect(() => {
-    getItems()
-  }, [])
-  useEffect(() => {
-    filterItems();
-  }, [Items, filter])
+  
+  function ProtectedRoute({ children }) {
+    const { user } = useAuth();
+    return user ? children : <Navigate to="/login" />;
+  }
 
   return (
-    <div className="App bg-teal-50 h-screen">
-      <Navbar/>
-      <ItemList/>
-    </div>
+    <AuthProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Navigate to="/home"/>}/>
+          <Route path="/login" element={<Login/>}/>
+          <Route path="/home" element={
+            <ProtectedRoute>
+              <Home/>
+            </ProtectedRoute>
+          }/>
+        </Routes>
+      </Router>
+    </AuthProvider>
   )
 }
 
